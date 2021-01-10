@@ -8,7 +8,7 @@ public class PrimeNo {
         System.out.println("Enter the number");
         Scanner scanner = new Scanner(System.in);
         no = scanner.nextInt();
-        for (var i = 1; i <= no; i++) {
+        for (int i = 1; i <= no; i++) {
             if (no % i == 0)
                 p += 1;
         }
