@@ -4,6 +4,7 @@ import com.company.corejava.inheritence.Citizen;
 
 public class CitizenProtected extends Citizen {
     int citizenId = 234567;
+    protected String citizenName = "John";
 
     public void test(){
         System.out.println("TEST");
