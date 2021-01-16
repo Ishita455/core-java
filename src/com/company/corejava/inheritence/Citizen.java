@@ -14,6 +14,7 @@ public class Citizen implements Country,State{
 
 
     @Override
+
     public void healthDetails() {
         System.out.println("Your Health is Good! ");
     }

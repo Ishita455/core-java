@@ -18,6 +18,7 @@ public class ListDemoOne {
         numberList.add("BLUE Ball");
         numberList.add(2005);
 
+
         for(int i=0; i<numberList.size(); i++){
             System.out.println("COLOR BALLS: "+numberList.get(i));
         }
