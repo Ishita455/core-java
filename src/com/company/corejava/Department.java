@@ -1,7 +1,5 @@
 package com.company.corejava;
 
-import com.company.Student;
-
 public class Department {
     int deptId;
     String deptName;

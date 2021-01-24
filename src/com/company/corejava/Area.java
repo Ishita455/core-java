@@ -1,4 +1,4 @@
-package com.company;
+package com.company.corejava;
 
 public class Area {
     public double area(double r){

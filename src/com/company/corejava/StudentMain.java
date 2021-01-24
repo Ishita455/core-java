@@ -1,4 +1,6 @@
-package com.company;
+package com.company.corejava;
+
+import com.company.corejava.Student;
 
 import java.util.Scanner;
 
