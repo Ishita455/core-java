@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class GenericsListDemo {
     public static void  main(String[] args){
 
-        //empIdList only allows to add Integer datatype to the list as we had added a contrain through generic
+        //empIdList only allows to add Integer datatype to the list as we had added a constrain through generic
         ArrayList<Integer> empIdList = new ArrayList<Integer>();
         ArrayList<String> nameList = new ArrayList<>();
 
