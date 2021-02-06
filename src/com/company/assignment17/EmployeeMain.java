@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class EmployeeMain {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
 
         Integer empId;
         String empName;
@@ -76,58 +76,41 @@ public class EmployeeMain {
                 break;
 
             case 3:
-                    System.out.println("Edit Employee Details");
-                    System.out.println("Enter the Employee Id");
-                    empId = sc.nextInt();
+                System.out.println("Search the Employee with ID");
+                empId = sc.nextInt();
+                sc.nextLine();
+                Employee empResult1 = readEmployee(empId);
+                if(empResult1 == null){
+                    System.out.println("Employee not found "+empId);
+                }else {
+                    System.out.println("Enter your new name");
+                    empResult1.empName = sc.nextLine();
+                    addEmployee(empResult1);
+                    System.out.println("Successfully updated");
 
-                    int j = 0;
-                    for (Employee e : emp) {
-                        if (empId.equals(e.empId)) {
-                            System.out.println("");
-                            j++;
-                        }
-                        int ch1 = 0;
-                        System.out.println("Edit: \n 1: Employee Id \n 2: Employee Name");
-                        System.out.println("Enter choice");
-                        ch1 = sc.nextInt();
-
-                        switch (ch1) {
-                            case 1:
-                                System.out.println("Enter New Employee Id");
-                                e.empId = sc.nextInt();
-                                sc.nextLine();
-                            case 2:
-                                System.out.println("Enter New Employee Name");
-                                e.empName = sc.nextLine();
-                                sc.nextLine();
-                            default:
-                                System.out.println("");
-                        }
-
-                    }
+                }
                 break;
+
             case 4:
                 System.out.println("Delete Employee Details");
                 System.out.println("Enter the Employee Id to be Deleted");
                 empId = sc.nextInt();
-                int k = 0;
+                sc.nextLine();
+                boolean s=false;
 
-                try {
-                    for (Employee e:emp){
-                        if (empId.equals(e.empId))
-                        {
-                            emp.remove(e.empId);
-                            emp.remove(e.empName);
-                            k++;
-                        }
-                    }
-                    if (k==0){
-                        System.out.println("Employee Details not found");
-                    }
+                Employee empResult2 = readEmployee(empId);
+                if (empResult2 == null){
+                    System.out.println("Employee not found"+empId);
                 }
-                catch (Exception ex){
-                    System.out.println(ex);
+                else {
+                    File file = new File(empId+".ser");
+                    s = file.delete();
                 }
+                if(s){
+                    System.out.println(empResult2.empId+"Successfully deleted");
+                }
+                break;
+
             case 5:
                 System.out.println("-----------Employee Details--------");
 
@@ -159,14 +142,14 @@ public class EmployeeMain {
         return false;
     }
 
-    public static Employee readEmployee(Integer empId){
+    public static Employee readEmployee(Integer empId) throws IOException {
         Employee emp1 = null;
+        FileInputStream file = null;
+        ObjectInputStream in = null;
         try {
-            FileInputStream file = new FileInputStream(empId+".ser");
-            ObjectInputStream in = new ObjectInputStream(file);
+            file = new FileInputStream(empId+".ser");
+            in = new ObjectInputStream(file);
             emp1 = (Employee)in.readObject();
-            in.close();
-            file.close();
             System.out.println("Object has been deserialized");
 
 
@@ -177,6 +160,10 @@ public class EmployeeMain {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }
+        finally {
+            in.close();
+            file.close();
         }
         return emp1;
     }
